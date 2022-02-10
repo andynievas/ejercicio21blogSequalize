@@ -8,9 +8,9 @@ const userController = require("../controllers/userController");
 
 publicRouter.get("/", (req, res)=>{
 
-    userController.index();
+    // userController.index();
 
-    res.render("index", { articles });
+    res.render("index");//, { articles }
 });
 
 publicRouter.get("/articulo/:id", (req, res)=>{
