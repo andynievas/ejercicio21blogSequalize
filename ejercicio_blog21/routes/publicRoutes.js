@@ -1,16 +1,14 @@
 const express = require("express");
 const publicRouter = express.Router();
 
-const userController = require("../controllers/userController");
+const pagesController = require("../controllers/pagesController");
 
 // Rutas del Públicas:
 // ...
 
 publicRouter.get("/", (req, res)=>{
 
-    // userController.index();
-
-    res.render("index");//, { articles }
+    pagesController.showHome(req, res);
 });
 
 publicRouter.get("/articulo/:id", (req, res)=>{
