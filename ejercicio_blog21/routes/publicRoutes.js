@@ -6,14 +6,12 @@ const pagesController = require("../controllers/pagesController");
 // Rutas del Públicas:
 // ...
 
-publicRouter.get("/", (req, res)=>{
-
-    pagesController.showHome(req, res);
+publicRouter.get("/", (req, res) => {
+  pagesController.showHome(req, res);
 });
 
-publicRouter.get("/articulo/:id", (req, res)=>{
-    console.log( "Se recibio el id", req.params.id );
-    res.render("index");
+publicRouter.get("/articulo/:id", (req, res) => {
+  pagesController.showArticle(req, res);
 });
 
 module.exports = publicRouter;
