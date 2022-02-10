@@ -81,11 +81,11 @@
           <!-- Post preview-->
           <% for (let article of articles) { %>
           <div class="post-preview">
-            <a href="post.html">
+            <a href="/articulo/<%= article.id %> ">
               <h2 class="post-title"><%= article.title %></h2>
               <p><%= article.content %></p>
             </a>
-            <p class="post-meta"><%= article.updatedAt %></p>
+            <p class="post-meta">Posted on <%= article.updatedAt %></p>
           </div>
 
           <% } %>
