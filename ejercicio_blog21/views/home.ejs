@@ -82,10 +82,10 @@
           <% for (let article of articles) { %>
           <div class="post-preview">
             <a href="post.html">
-              <h2 class="post-title"><%= articles.title %></h2>
-              <p><%= articles.content %></p>
+              <h2 class="post-title"><%= article.title %></h2>
+              <p><%= article.content %></p>
             </a>
-            <p class="post-meta">Posted on <%= articles.updatedAt %></p>
+            <p class="post-meta"><%= article.updatedAt %></p>
           </div>
 
           <% } %>
