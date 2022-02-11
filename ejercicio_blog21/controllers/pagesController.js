@@ -25,7 +25,7 @@ async function create(req, res) {
     title: String(req.body.title),
     content: String(req.body.content),
     image: String(req.body.image),
-    createdAt: "11/02/2022 - detarde(ejemplo)",
+    createdAt: "11/02/2022",
   });
   console.log(article);
   res.redirect("/");
