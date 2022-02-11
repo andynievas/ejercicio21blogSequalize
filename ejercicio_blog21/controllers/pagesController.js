@@ -5,6 +5,11 @@ async function showHome(req, res) {
   res.render("home", { articles });
 }
 
+async function showHome(req, res) {
+  const articles = await Article.findAll();
+  res.render("admin", { articles });
+}
+
 async function showArticle(req, res) {
   const article = await Article.findByPk(Number(req.params.id));
   res.render("article", { article });
