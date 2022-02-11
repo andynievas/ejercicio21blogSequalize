@@ -4,9 +4,7 @@ const pagesController = require("../controllers/pagesController");
 // Rutas del Admin:
 // ...
 
-adminRouter.get("/", (req, res) => {
-  res.render("admin");
-});
+adminRouter.get("/", (req, res) => pagesController.showAdmin(req, res));
 
 adminRouter.get("/crear", (req, res) => {
   res.render("create");
