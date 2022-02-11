@@ -5,7 +5,7 @@ async function showHome(req, res) {
   res.render("home", { articles });
 }
 
-async function showHome(req, res) {
+async function showAdmin(req, res) {
   const articles = await Article.findAll();
   res.render("admin", { articles });
 }
