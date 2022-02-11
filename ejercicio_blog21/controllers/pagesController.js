@@ -10,12 +10,17 @@ async function showArticle(req, res) {
   res.render("article", { article });
 }
 
+async function editArticle(req, res) {
+  const article = await Article.findByPk(Number(req.params.id));
+  res.render("edit", { article });
+}
+
 async function create(req, res) {
   const article = await Article.create({
-    title: "req.body.title",
-    content: "req.body.content",
-    image: "req.body.image",
-    createdAt: "req.body.date",
+    title: String(req.body.title),
+    content: String(req.body.content),
+    image: String(req.body.image),
+    createdAt: String(req.body.date),
   });
   console.log(article);
   res.redirect("home");
@@ -26,10 +31,10 @@ async function edit(req, res) {
     {
       title: "req.body.title",
     },
-    { content: "req.body.content" },
-    { image: "req.body.image" },
-    { createdAt: "req.body.date" },
-    { where: { id: "req.params.id" } },
+    { content: String(req.body.content) },
+    { image: String(req.body.image) },
+    { createdAt: String(req.body.createdAt) },
+    { where: { id: String(req.body.id) } },
   );
   console.log(article);
   res.redirect("article");
@@ -50,6 +55,8 @@ async function showAboutUs(req, res) {
 module.exports = {
   showHome,
   showArticle,
+  create,
+  edit,
   /* showContact,
   showAboutUs, */
 };
