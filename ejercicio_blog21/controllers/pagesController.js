@@ -15,6 +15,14 @@ async function showArticle(req, res) {
   res.render("article", { article });
 }
 
+async function showCreate(req, res) {
+  res.render("create");
+}
+
+async function showEditar(req, res) {
+  res.render("edit");
+}
+
 async function editArticle(req, res) {
   const article = await Article.findByPk(Number(req.params.id));
   res.render("edit", { article });
@@ -45,6 +53,10 @@ async function edit(req, res) {
   res.redirect("article");
 }
 
+async function destroy(req, res) {
+  const article = await Article.destroy({ where: { id: String(req.body.id) } });
+}
+
 /* *************************************************************** */
 /* async function showContact(req, res) {
   res.render("contact");
@@ -64,6 +76,7 @@ module.exports = {
   edit,
   showAdmin,
   editArticle,
+  destroy,
   /* showContact,
   showAboutUs, */
 };
