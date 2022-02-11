@@ -54,25 +54,18 @@
         </div>
       </div>
     </article>
-    <!-- Comments-->
+    <!-- Form -->
     <div class="container">
-      <div class="mb-3 shadow border rounded p-3 d-flex flex-column">
-        <header class="bg-light">
-          <label for="comments" class="form-label">Ingresar comentarios</label>
-        </header>
+      <form action="/admin/editar/<%= article.id %>">
+        <label for="aaa">Title</label>
+        <input type="text" placeholder="Ingresa el titulo del articulo" >
 
-        <textarea
-          placeholder="Escribir comentarios"
-          class="form-control"
-          id="comments"
-          rows="6"
-        ></textarea>
-        <div class="d-flex justify-content-end w-100 mt-3">
-          <a href="/articulo/<%-article.id%> "
-            ><button type="button" class="btn btn-success rounded">Enviar comentario</button></a
-          >
-        </div>
-      </div>
+        <label for="aaa">Content</label>
+        <textarea name="content" id="content" cols="30" rows="10" placeholder="Aca ingresa tu articulo modificado" ></textarea>
+
+        <label for="aaa">Imagen</label>
+        <input type="text" placeholder="URL de la imagen nueva" >
+      </form>
     </div>
     <!-- Footer-->
     <footer class="border-top">
