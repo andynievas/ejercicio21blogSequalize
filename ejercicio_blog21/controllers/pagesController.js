@@ -55,7 +55,7 @@ async function edit(req, res) {
     { content: String(req.body.content) },
     { image: String(req.body.image) },
     { createdAt: String(req.body.createdAt) },
-    { where: { id: String(req.body.id) } },
+    { where: { id: String(req.params.id) } },
   );
   console.log(article);
   res.redirect("article");
