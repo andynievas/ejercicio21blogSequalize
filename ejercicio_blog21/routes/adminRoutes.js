@@ -8,7 +8,7 @@ const pagesController = require("../controllers/pagesController");
 adminRouter.get("/", (req, res) => pagesController.showAdmin(req, res));
 
 adminRouter.get("/editar/:id", (req, res) => {
-  pagesController.showEditar(req, res);
+  pagesController.showEdit(req, res);
 });
 
 adminRouter.post("/editar/:id", (req, res) => {

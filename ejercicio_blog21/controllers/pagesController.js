@@ -19,11 +19,7 @@ async function showCreate(req, res) {
   res.render("create");
 }
 
-async function showEditar(req, res) {
-  res.render("edit");
-}
-
-async function editArticle(req, res) {
+async function showEdit(req, res) {
   const article = await Article.findByPk(Number(req.params.id));
   res.render("edit", { article });
 }
@@ -75,8 +71,9 @@ module.exports = {
   create,
   edit,
   showAdmin,
-  editArticle,
   destroy,
+  showCreate,
+  showEdit,
   /* showContact,
   showAboutUs, */
 };
