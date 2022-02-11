@@ -2,7 +2,12 @@ const { Article } = require("../models");
 
 async function showHome(req, res) {
   const articles = await Article.findAll();
-  res.render("home", { articles });
+  res.render("home", {
+    articles,
+    title: "Clean Blog",
+    subtitle: "A Blog Theme by Start Bootstrap",
+    image: "/assets/img/home-bg.jpg",
+  });
 }
 
 async function showArticle(req, res) {
@@ -12,7 +17,12 @@ async function showArticle(req, res) {
 
 async function showAdmin(req, res) {
   const articles = await Article.findAll();
-  res.render("admin", { articles });
+  res.render("admin", {
+    articles,
+    title: "Welcome to Administrator page",
+    subtitle: "Manage all the articles",
+    image: "/assets/img/contact-bg.jpg",
+  });
 }
 
 // Muestra un formulario para crear un articulo
