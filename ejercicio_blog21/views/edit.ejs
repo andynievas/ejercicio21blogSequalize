@@ -29,6 +29,7 @@
   <body>
     <!-- Navigation-->
     <%- include("partials/navbar") %>
+
     <!-- Page Header-->
     <header class="masthead" style="background-image: url(<%-article.image%>)">
       <div class="container position-relative px-4 px-lg-5">
@@ -55,20 +56,94 @@
       </div>
     </article>
     <!-- Form -->
-    <div class="container">
-      <form action="/admin/editar/<%= article.id %>">
-        <label for="aaa">Title</label>
-        <input type="text" placeholder="Ingresa el titulo del articulo" >
 
-        <label for="aaa">Content</label>
-        <textarea name="content" id="content" cols="30" rows="10" placeholder="Aca ingresa tu articulo modificado" ></textarea>
+    <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+          <h3>Modifica el articulo</h3>
+          
+          <form method="post" action="/admin/editar/<%= article.id %>">
+            <div class="form-floating">
+              <input
+                name="title"
+                class="form-control"
+                id="title"
+                type="text"
+                data-sb-validations="required"
+              />
+              <label for="title">Title</label>
+              <div class="invalid-feedback" data-sb-feedback="name:required">
+                A title is required.
+              </div>
+            </div>
 
-        <label for="aaa">Imagen</label>
-        <input type="text" placeholder="URL de la imagen nueva" >
-      </form>
+            <div class="form-floating">
+              <textarea
+                name="content"
+                class="form-control"
+                id="content"
+                placeholder="Enter your article content"
+                style="height: 12rem"
+                data-sb-validations="required"
+              ></textarea>
+              <label for="message">Content</label>
+              <div class="invalid-feedback" data-sb-feedback="message:required">
+                Article content is required.
+              </div>
+            </div>
+            <div class="form-floating">
+              <input
+                name="image"
+                class="form-control"
+                id="image"
+                type="url"
+                placeholder="Enter your image url..."
+                data-sb-validations="required"
+              />
+              <label for="image">Image URL</label>
+              <div class="invalid-feedback" data-sb-feedback="phone:required">
+                An image URL is required.
+              </div>
+            </div>
+            <br />
+            <!-- Submit success message-->
+            <!---->
+            <!-- This is what your users will see when the form-->
+            <!-- has successfully submitted-->
+            <div class="d-none" id="submitSuccessMessage">
+              <div class="text-center mb-3">
+                <div class="fw-bolder">Form submission successful!</div>
+
+                <a href="https://startbootstrap.com/solution/contact-forms"
+                  >https://startbootstrap.com/solution/contact-forms</a
+                >
+              </div>
+            </div>
+            <!-- Submit error message-->
+            <!---->
+            <!-- This is what your users will see when there is-->
+            <!-- an error submitting the form-->
+            <div class="d-none" id="submitErrorMessage">
+              <div class="text-center text-danger mb-3">Error sending message!</div>
+            </div>
+            <!-- Submit Button-->
+            <input
+              class="btn btn-primary text-uppercase"
+              id="submitBtn"
+              type="submit"
+              value="Send"
+            />
+          </form>
+
+        </div>
+      </div>
     </div>
+
     <!-- Footer-->
-    <footer class="border-top">
+
+    <- include("partials/footer") >
+
+    <footer class="d-none">
       <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
