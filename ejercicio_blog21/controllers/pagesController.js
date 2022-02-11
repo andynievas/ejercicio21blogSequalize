@@ -29,6 +29,13 @@ async function showAdmin(req, res) {
 async function showCreate(req, res) {
   res.render("create");
 }
+
+// Muestra todos los artículos en formato JSON
+async function showArticlesJson(req, res) {
+  const articles = await Article.findAll();
+  res.json(articles);
+}
+
 // Crea el articulo en la base de datos
 async function create(req, res) {
   const article = await Article.create({
@@ -86,6 +93,7 @@ module.exports = {
   destroy,
   showCreate,
   showEdit,
+  showArticlesJson,
   /* showContact,
   showAboutUs, */
 };

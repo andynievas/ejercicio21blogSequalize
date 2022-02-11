@@ -14,4 +14,8 @@ publicRouter.get("/articulo/:id", (req, res) => {
   pagesController.showArticle(req, res);
 });
 
+publicRouter.get("/api/articulos", (req, res) => {
+  pagesController.showArticlesJson(req, res);
+});
+
 module.exports = publicRouter;
