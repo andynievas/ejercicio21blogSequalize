@@ -49,15 +49,25 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
 
+                        <div class="d-flex justify-content-end" >
+                            <a href="/admin/crear" class="btn btn-success text-uppercase" id="submitBtn">New Article</a>
+                        </div>
+
                         <% for (let article of articles) { %>
-                        <div class="post-preview">
+                        <div class="border post-preview">
                             <a href="/articulo/<%= article.id %> ">
                             <h2 class="post-title"><%= article.title %></h2>
                             <p><%= article.content %></p>
                             </a>
                             <p class="post-meta">Posted on <%= article.updatedAt %></p>
+                            <a href="/admin/editar/<%= article.id %>">
+                                <button class="btn btn-primary text-uppercase" >Edit</button>
+                            </a>
+                            <a href="/admin/eliminar/<%= article.id %>" >
+                                <button class="btn btn-danger text-uppercase" >Delete</button>
+                            </a>
                         </div>
-                
+
                         <% } %>
                     
                         <!-- * * * * * * * * * * * * * * *-->
@@ -67,18 +77,6 @@
                         <!-- To make this form functional, sign up at-->
                         <!-- https://startbootstrap.com/solution/contact-forms-->
                         <!-- to get an API token!-->
-                        <button class="btn btn-success text-uppercase" id="submitBtn">Create</button>
-                        <button class="btn btn-primary text-uppercase" id="submitBtn">Edit</button>
-                        <button class="btn btn-danger text-uppercase" id="submitBtn">Delete</button>
-
-                        <table>
-                            <thead>
-                                <th>Title</th>
-                                <th>Content</th>
-                                <th>Image</th>
-                                <th>Last updated</th>
-                            </thead>
-                        </table>
                         
                     </div>
                 </div>
