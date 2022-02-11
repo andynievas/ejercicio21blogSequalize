@@ -24,15 +24,16 @@ async function showEdit(req, res) {
   res.render("edit", { article });
 }
 
+// Crea el articulo en la base de datos
 async function create(req, res) {
   const article = await Article.create({
     title: String(req.body.title),
     content: String(req.body.content),
     image: String(req.body.image),
-    createdAt: String(req.body.date),
+    createdAt: "11/02/2022 - detarde(ejemplo)",
   });
   console.log(article);
-  res.redirect("home");
+  res.redirect("/");
 }
 
 async function edit(req, res) {
