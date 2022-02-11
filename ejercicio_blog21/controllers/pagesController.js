@@ -5,25 +5,20 @@ async function showHome(req, res) {
   res.render("home", { articles });
 }
 
-async function showAdmin(req, res) {
-  const articles = await Article.findAll();
-  res.render("admin", { articles });
-}
-
 async function showArticle(req, res) {
   const article = await Article.findByPk(Number(req.params.id));
   res.render("article", { article });
 }
 
+async function showAdmin(req, res) {
+  const articles = await Article.findAll();
+  res.render("admin", { articles });
+}
+
+// Muestra un formulario para crear un articulo
 async function showCreate(req, res) {
   res.render("create");
 }
-
-async function showEdit(req, res) {
-  const article = await Article.findByPk(Number(req.params.id));
-  res.render("edit", { article });
-}
-
 // Crea el articulo en la base de datos
 async function create(req, res) {
   const article = await Article.create({
@@ -36,10 +31,16 @@ async function create(req, res) {
   res.redirect("/");
 }
 
+// Muestra el formulario para editar un articulo
+async function showEdit(req, res) {
+  const article = await Article.findByPk(Number(req.params.id));
+  res.render("edit", { article });
+}
+// Actualiza los datos del articulo en la base de datos
 async function edit(req, res) {
   const article = await Article.update(
     {
-      title: "req.body.title",
+      title: String(req.body.title),
     },
     { content: String(req.body.content) },
     { image: String(req.body.image) },
@@ -51,7 +52,7 @@ async function edit(req, res) {
 }
 
 async function destroy(req, res) {
-  const article = await Article.destroy({ where: { id: String(req.body.id) } });
+  const article = await Article.destroy({ where: { id: Number(req.body.id) } });
 }
 
 /* *************************************************************** */
