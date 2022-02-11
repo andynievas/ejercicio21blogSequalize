@@ -18,6 +18,11 @@ const Article = require("./Article")(sequelize, Model, DataTypes);
 // Luego de definir los modelos, se pueden establecer relaciones
 // entre los mismos...
 
+User.hasMany(Article);
+User.hasMany(Comment);
+Article.hasMany( Comment );
+Article.belongsTo( User );
+
 module.exports = {
   sequelize,
   User,

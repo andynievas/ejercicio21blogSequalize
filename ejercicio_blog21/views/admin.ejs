@@ -48,28 +48,38 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</p>
-                        <div class="my-5">
-                            <!-- * * * * * * * * * * * * * * *-->
-                            <!-- * * SB Forms Contact Form * *-->
-                            <!-- * * * * * * * * * * * * * * *-->
-                            <!-- This form is pre-integrated with SB Forms.-->
-                            <!-- To make this form functional, sign up at-->
-                            <!-- https://startbootstrap.com/solution/contact-forms-->
-                            <!-- to get an API token!-->
-                            <button class="btn btn-success text-uppercase" id="submitBtn">Create</button>
-                            <button class="btn btn-primary text-uppercase" id="submitBtn">Edit</button>
-                            <button class="btn btn-danger text-uppercase" id="submitBtn">Delete</button>
 
-                            <table>
-                                <thead>
-                                    <th>Title</th>
-                                    <th>Content</th>
-                                    <th>Image</th>
-                                    <th>Last updated</th>
-                                </thead>
-                            </table>
+                        <% for (let article of articles) { %>
+                        <div class="post-preview">
+                            <a href="/articulo/<%= article.id %> ">
+                            <h2 class="post-title"><%= article.title %></h2>
+                            <p><%= article.content %></p>
+                            </a>
+                            <p class="post-meta">Posted on <%= article.updatedAt %></p>
                         </div>
+                
+                        <% } %>
+                    
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- * * SB Forms Contact Form * *-->
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- This form is pre-integrated with SB Forms.-->
+                        <!-- To make this form functional, sign up at-->
+                        <!-- https://startbootstrap.com/solution/contact-forms-->
+                        <!-- to get an API token!-->
+                        <button class="btn btn-success text-uppercase" id="submitBtn">Create</button>
+                        <button class="btn btn-primary text-uppercase" id="submitBtn">Edit</button>
+                        <button class="btn btn-danger text-uppercase" id="submitBtn">Delete</button>
+
+                        <table>
+                            <thead>
+                                <th>Title</th>
+                                <th>Content</th>
+                                <th>Image</th>
+                                <th>Last updated</th>
+                            </thead>
+                        </table>
+                        
                     </div>
                 </div>
             </div>
