@@ -62,6 +62,8 @@ module.exports = {
   showArticle,
   create,
   edit,
+  showAdmin,
+  editArticle,
   /* showContact,
   showAboutUs, */
 };
