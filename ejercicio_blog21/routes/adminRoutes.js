@@ -19,7 +19,7 @@ adminRouter.get("/crear", (req, res) => pagesController.showCreate(req, res));
 
 adminRouter.post("/crear", (req, res) => pagesController.create(req, res));
 
-adminRouter.post("/eliminar", (req, res) => {
+adminRouter.get("/eliminar/:id", (req, res) => {
   pagesController.destroy(req, res);
 });
 
