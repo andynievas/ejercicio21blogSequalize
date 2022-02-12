@@ -70,7 +70,8 @@ async function edit(req, res) {
 }
 
 async function destroy(req, res) {
-  const article = await Article.destroy({ where: { id: Number(req.body.id) } });
+  const article = await Article.destroy({ where: { id: Number(req.params.id) } });
+  res.redirect("/admin");
 }
 
 /* *************************************************************** */
