@@ -41,6 +41,25 @@
             >New Article</a
           >
         </div>
+
+        <div class="p-2" style="border: gray 1px solid;" >
+          <div class="d-flex justify-content-between">
+            <h5 class="me-4" ><%= articles[0].title %></h5>
+
+            <div >
+              <a href="/admin/editar/<%= articles[0].id %>">
+                <button class="btn btn-sm btn-primary text-uppercase w-100">Edit</button>
+              </a>
+              <a href="/admin/eliminar/<%= articles[0].id %>">
+                <button class="btn btn-sm btn-danger text-uppercase w-100">Delete</button>
+              </a>
+            </div>
+
+          </div>
+          <p class="mt-0" ><%= articles[0].content.substring(0, 100) %></p>
+        </div>
+
+
         <table class="table table-striped border p-2">
           <thead>
             <tr>
@@ -58,10 +77,10 @@
               <td><%= article.user.firstname %> <%= article.user.lastname %></td>
               <td class="d-flex flex-column">
                 <a href="/admin/editar/<%= article.id %>">
-                  <button class="btn btn-primary text-uppercase w-100">Edit</button>
+                  <button class="btn btn-sm btn-primary text-uppercase w-100">Edit</button>
                 </a>
                 <a href="/admin/eliminar/<%= article.id %>">
-                  <button class="btn btn-danger text-uppercase w-100 mt-1">Delete</button>
+                  <button class="btn btn-sm btn-danger text-uppercase w-100 mt-1">Delete</button>
                 </a>
               </td>
             </tr>
