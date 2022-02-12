@@ -36,10 +36,8 @@
           <div class="col-md-10 col-lg-8 col-xl-7">
             <div class="post-heading">
               <h1><%- article.title %></h1>
-              <span class="meta">
-                Posted by <%- article.author %> on <%- article.createdAt %>
-              </span>
-              <p>Autor del post <%= user.firstname + " " + user.lastname %></p>
+              <span class="meta"> Posted on <%- article.createdAt %> </span>
+              <p>By <%= user.firstname + " " + user.lastname %></p>
             </div>
           </div>
         </div>
@@ -55,12 +53,19 @@
         </div>
       </div>
     </article>
+
+    <div class="container">
+      <% for (let comment of comments) { %>
+      <div class="card">
+        <div class="card-header">Comments about article</div>
+        <div class="card-body"><%= article.comment %></div>
+      </div>
+      <% } %>
+    </div>
     <!-- Comments-->
     <div class="container">
       <div class="mb-3 shadow border rounded p-3 d-flex flex-column">
-        <header class="bg-light">
-          <label for="comments" class="form-label">Ingresar comentarios</label>
-        </header>
+        <label for="comments" class="form-label">Ingresar comentarios</label>
 
         <textarea
           placeholder="Escribir comentarios"
