@@ -1,11 +1,10 @@
 const { Article, User } = require("../models");
 
 async function showHome(req, res) {
-  const articles = await Article.findAll({ include: User });
+  const articles = await Article.findAll();
 
   res.render("home", {
     articles,
-
     title: "Clean Blog",
     subtitle: "A Blog Theme by Start Bootstrap",
     image: "/assets/img/home-bg.jpg",
@@ -13,8 +12,8 @@ async function showHome(req, res) {
 }
 
 async function showArticle(req, res) {
-  const article = await Article.findByPk(Number(req.params.id));
-  res.render("article", { article });
+  const article = await Article.findByPk( Number(req.params.id), { include: User } );
+  res.render("article", { article, user: article.user });
 }
 
 async function showAdmin(req, res) {
