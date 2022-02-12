@@ -11,7 +11,8 @@ module.exports = async () => {
       title: faker.lorem.sentence(5),
       content: faker.lorem.paragraphs(),
       image: faker.image.imageUrl(),
-      userId: i + 1,
+      date: faker.date.past(),
+      userId: faker.datatype.number({ min: 1, max: 50 }),
     });
   }
 

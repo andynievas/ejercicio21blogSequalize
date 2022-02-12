@@ -45,7 +45,9 @@
               <p><%= article.content %></p>
             </a>
 
-            <p class="post-meta">Posted on <%= article.updatedAt %></p>
+            <p class="post-meta">
+              Posted on <%=article.date%> by <%=article.user.firstname%> <%=article.user.lastname%>
+            </p>
           </div>
 
           <% } %>
