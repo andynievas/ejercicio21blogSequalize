@@ -36,40 +36,40 @@
     <!-- Main Content -->
     <main class="mb-4">
       <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-          <div class="col-md-10 col-lg-8 col-xl-7">
-            <div class="d-flex justify-content-end">
-              <a href="/admin/crear" class="btn btn-success text-uppercase" id="submitBtn"
-                >New Article</a
-              >
-            </div>
-
+        <div class="d-flex justify-content-end mb-2">
+          <a href="/admin/crear" class="btn btn-success text-uppercase" id="submitBtn"
+            >New Article</a
+          >
+        </div>
+        <table class="table table-striped border p-2">
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Article</th>
+              <th scope="col">Action</th>
+              <th scope="col">Author</th>
+            </tr>
+          </thead>
+          <tbody>
             <% for (let article of articles) { %>
-            <div class="border post-preview">
-              <div>
-                <h2 class="post-title"><%= article.title %></h2>
-                <p><%= article.content %></p>
-              </div>
-              <p class="post-meta">Posted on <%= article.updatedAt %></p>
-              <a href="/admin/editar/<%= article.id %>">
-                <button class="btn btn-primary text-uppercase">Edit</button>
-              </a>
-              <a href="/admin/eliminar/<%= article.id %>">
-                <button class="btn btn-danger text-uppercase">Delete</button>
-              </a>
-            </div>
-
+            <tr>
+              <td><%= article.title.substring(0,14) %></td>
+              <td><%= article.content.substring(0, 100) %></td>
+              <td><%= article.user.firstname %> <%= article.user.lastname %></td>
+              <td>
+                <a href="/admin/editar/<%= article.id %>">
+                  <button class="btn btn-primary text-uppercase">Edit</button>
+                </a>
+                <a href="/admin/eliminar/<%= article.id %>">
+                  <button class="btn btn-danger text-uppercase">Delete</button>
+                </a>
+              </td>
+            </tr>
             <% } %>
 
-            <!-- * * * * * * * * * * * * * * *-->
-            <!-- * * SB Forms Contact Form * *-->
-            <!-- * * * * * * * * * * * * * * *-->
-            <!-- This form is pre-integrated with SB Forms.-->
-            <!-- To make this form functional, sign up at-->
-            <!-- https://startbootstrap.com/solution/contact-forms-->
-            <!-- to get an API token!-->
-          </div>
-        </div>
+            <!-- <td colspan="2">Larry the Bird</td> -->
+          </tbody>
+        </table>
       </div>
     </main>
     <!-- Footer-->

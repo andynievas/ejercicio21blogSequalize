@@ -17,12 +17,13 @@ async function showArticle(req, res) {
 }
 
 async function showAdmin(req, res) {
-  const articles = await Article.findAll();
+  const articles = await Article.findAll({ include: User });
   res.render("admin", {
     articles,
     title: "Welcome to Administrator page",
     subtitle: "Manage all the articles",
     image: "/assets/img/contact-bg.jpg",
+    user: articles.user,
   });
 }
 
