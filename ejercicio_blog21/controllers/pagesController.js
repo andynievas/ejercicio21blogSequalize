@@ -1,9 +1,11 @@
-const { Article } = require("../models");
+const { Article, User } = require("../models");
 
 async function showHome(req, res) {
-  const articles = await Article.findAll();
+  const articles = await Article.findAll({ include: User });
+
   res.render("home", {
     articles,
+
     title: "Clean Blog",
     subtitle: "A Blog Theme by Start Bootstrap",
     image: "/assets/img/home-bg.jpg",

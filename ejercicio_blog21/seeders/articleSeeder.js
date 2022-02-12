@@ -1,5 +1,5 @@
 const { faker } = require("@faker-js/faker");
-const { Article } = require("../models");
+const { Article, User } = require("../models");
 
 faker.locale = "es";
 
@@ -11,6 +11,7 @@ module.exports = async () => {
       title: faker.lorem.sentence(5),
       content: faker.lorem.paragraphs(),
       image: faker.image.imageUrl(),
+      userId: i + 1,
     });
   }
 
