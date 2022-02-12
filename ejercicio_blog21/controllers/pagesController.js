@@ -13,9 +13,14 @@ async function showHome(req, res) {
 
 async function showArticle(req, res) {
   const article = await Article.findByPk(Number(req.params.id), { include: [User, Comment] });
-  console.log(User);
-  console.log(comments);
-  res.render("article", { article, user: article.user, comment: article.comment });
+
+  const ref = req.params.id;
+  console.log(article.comments);
+  res.render("article", {
+    article,
+    user: article.user,
+    comments: article.comments,
+  });
 }
 
 async function showAdmin(req, res) {

@@ -55,10 +55,10 @@
     </article>
 
     <div class="container">
-      <% for (let comment of article) { %>
+      <div class="">Comments about article</div>
+      <% for (let comment of comments) { %>
       <div class="card">
-        <div class="card-header">Comments about article</div>
-        <div class="card-body"><%= article.comment.content %></div>
+        <div class="card-body"><%=comment.content %></div>
       </div>
       <% } %>
     </div>
