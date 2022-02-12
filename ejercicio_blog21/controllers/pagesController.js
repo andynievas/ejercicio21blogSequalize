@@ -57,17 +57,22 @@ async function showEdit(req, res) {
 }
 // Actualiza los datos del articulo en la base de datos
 async function edit(req, res) {
-  const article = await Article.update(
+  console.log(req.body.newId);
+  const article = await Article.findByPk(req.body.newId);
+  await Article.update(
     {
       title: String(req.body.title),
+
+      content: String(req.body.content),
+      image: String(req.body.image),
     },
-    { content: String(req.body.content) },
-    { image: String(req.body.image) },
-    { createdAt: String(req.body.createdAt) },
-    { where: { id: String(req.params.id) } },
+    /* { createdAt: String(req.body.createdAt) }, */
+    /* { where: { id: String(req.params.id) } }, */
+
+    { where: { id: Number(req.body.newId) } },
   );
   console.log(article);
-  res.redirect("article");
+  res.redirect("/");
 }
 
 async function destroy(req, res) {

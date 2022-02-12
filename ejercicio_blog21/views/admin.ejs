@@ -46,14 +46,14 @@
             <tr>
               <th scope="col">Title</th>
               <th scope="col">Article</th>
-              <th scope="col">Action</th>
               <th scope="col">Author</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
             <% for (let article of articles) { %>
             <tr>
-              <td><%= article.title.substring(0,14) %></td>
+              <td><%= article.title %></td>
               <td><%= article.content.substring(0, 100) %></td>
               <td><%= article.user.firstname %> <%= article.user.lastname %></td>
               <td>

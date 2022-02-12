@@ -61,7 +61,7 @@
       <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
           <h3>Modifica el articulo</h3>
-          
+
           <form method="post" action="/admin/editar/<%= article.id %>">
             <div class="form-floating">
               <input
@@ -129,13 +129,13 @@
             </div>
             <!-- Submit Button-->
             <input
-              class="btn btn-primary text-uppercase"
+              class="btn btn-primary text-uppercase rounded"
               id="submitBtn"
               type="submit"
               value="Send"
             />
+            <input class="d-none" id="id" type="text" name="newId" value="<%= article.id %>" />
           </form>
-
         </div>
       </div>
     </div>
