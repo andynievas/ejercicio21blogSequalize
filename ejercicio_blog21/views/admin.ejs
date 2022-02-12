@@ -56,12 +56,12 @@
               <td><%= article.title %></td>
               <td><%= article.content.substring(0, 100) %></td>
               <td><%= article.user.firstname %> <%= article.user.lastname %></td>
-              <td>
+              <td class="d-flex flex-column">
                 <a href="/admin/editar/<%= article.id %>">
-                  <button class="btn btn-primary text-uppercase">Edit</button>
+                  <button class="btn btn-primary text-uppercase w-100">Edit</button>
                 </a>
                 <a href="/admin/eliminar/<%= article.id %>">
-                  <button class="btn btn-danger text-uppercase">Delete</button>
+                  <button class="btn btn-danger text-uppercase w-100 mt-1">Delete</button>
                 </a>
               </td>
             </tr>
