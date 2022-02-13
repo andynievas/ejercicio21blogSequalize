@@ -12,14 +12,13 @@ async function showHome(req, res) {
 }
 
 async function showArticle(req, res) {
-  const article = await Article.findByPk(Number(req.params.id), { include: [User, Comment] });
-
-  const ref = req.params.id;
-  console.log(article.comments);
+  const article = await Article.findByPk(Number(req.params.id), { include: [User, Comment], nested: true } );
+  const commentsWithUser = await Comment.findAll({ where: {'articleId': article.id }, include: [Article, User] });
+  
   res.render("article", {
     article,
     user: article.user,
-    comments: article.comments,
+    comments: commentsWithUser,
   });
 }
 

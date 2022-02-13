@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Noticia</title>
+    <title><%= article.title %></title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
     <script
@@ -35,9 +35,9 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
             <div class="post-heading">
-              <h1><%- article.title %></h1>
-              <span class="meta"> Posted on <%- article.createdAt %> </span>
-              <p>By <%= user.firstname + " " + user.lastname %></p>
+              <h1><%= article.title %></h1>
+              <span class="meta"> Posted on <%= article.createdAt %> </span>
+              <p style="text-align: end;" >By <%= user.firstname + " " + user.lastname %></p>
             </div>
           </div>
         </div>
@@ -48,20 +48,34 @@
       <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
-            <p><%- article.content %></p>
+            <p><%= article.content %></p>
+
+            <hr>
+
+            <p class="my-3" ><%= comments.length === 0 ? "Leave the first comment" : "Comments" %></p>
+            <% for (const comment of comments) { %>
+              <div class="card">
+                <p class="m-0" style="font-size: large" ><%=`${comment.user.firstname} ${comment.user.lastname}: ${comment.content}`%></p>
+              </div>
+            <% } %>
+
+            <hr>
+
+            <form action="/">
+              <textarea
+                placeholder="Escribir comentario..."
+                class="form-control shadow"
+                id="comments"
+                rows="2"
+              ></textarea>
+              <input type="button" class="btn btn-sm btn-success text-uppercase" value="Publicar" />
+            </form>
+
           </div>
         </div>
       </div>
     </article>
 
-    <div class="container">
-      <div class="">Comments about article</div>
-      <% for (let comment of comments) { %>
-      <div class="card">
-        <div class="card-body"><%=comment.content %></div>
-      </div>
-      <% } %>
-    </div>
     <!-- Comments-->
     <div class="container">
       <div class="mb-3 shadow border rounded p-3 d-flex flex-column">
@@ -75,7 +89,7 @@
         ></textarea>
         <div class="d-flex justify-content-end w-100 mt-3">
           <a href="/articulo/<%-article.id%> "
-            ><button type="button" class="btn btn-success rounded">Enviar comentario</button></a
+            ><button type="button" class="btn btn-success">Enviar comentario</button></a
           >
         </div>
       </div>
