@@ -60,38 +60,8 @@
                 method="post"
                 id="newArticle"
                 action="/admin/crear"
+                enctype="multipart/form-data"
               >
-                <div class="d-flex" >
-                  <div class="form-floating">
-                    <input
-                      name="firstname"
-                      class="form-control"
-                      id="username"
-                      type="text"
-                      placeholder="Enter your name..."
-                      data-sb-validations="required"
-                    />
-                    <label for="username">Firstname</label>
-                    <div class="invalid-feedback" data-sb-feedback="name:required">
-                      A firstname is required.
-                    </div>
-                  </div>
-                  <div class="form-floating">
-                    <input
-                      name="lastname"
-                      class="form-control"
-                      id="lastname"
-                      type="text"
-                      placeholder="Enter your name..."
-                      data-sb-validations="required"
-                    />
-                    <label for="lastname">Lastname</label>
-                    <div class="invalid-feedback" data-sb-feedback="name:required">
-                      A lastname is required.
-                    </div>
-                  </div>
-                </div>
-
                 <div class="form-floating">
                   <input
                     name="title"
@@ -126,8 +96,8 @@
                     name="image"
                     class="form-control"
                     id="image"
-                    type="url"
-                    placeholder="Enter your image url..."
+                    type="file"
+                    placeholder="Enter your image ..."
                     data-sb-validations="required"
                   />
                   <label for="image">Image URL</label>

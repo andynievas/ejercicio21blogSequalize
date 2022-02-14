@@ -1,8 +1,12 @@
 const { Article, User, Comment } = require("../models");
 const formidable = require("formidable");
+const { faker } = require("@faker-js/faker");
 
 async function showHome(req, res) {
-  const articles = await Article.findAll({ include: User });
+  const articles = await Article.findAll({
+    include: User,
+    order: [["date", "DESC"]],
+  });
 
   res.render("home", {
     articles,
@@ -53,13 +57,22 @@ async function showArticlesJson(req, res) {
 
 // Crea el articulo en la base de datos
 async function create(req, res) {
-  const article = await Article.create({
-    title: String(req.body.title),
-    content: String(req.body.content),
-    image: String(req.body.image),
-    createdAt: "11/02/2022",
+  const form = formidable({
+    multiples: false,
+    uploadDir: __dirname + "/../public/images",
+    keepExtensions: true,
   });
-  console.log(article);
+  form.parse(req, async (err, fields, files) => {
+    const randomUser = faker.datatype.number({ min: 1, max: 20 });
+
+    const article = await Article.create({
+      userId: randomUser,
+      title: String(fields.title),
+      content: String(fields.content),
+      image: String(files.image.newFilename),
+    });
+  });
+
   res.redirect("/");
 }
 
@@ -72,23 +85,19 @@ async function showEdit(req, res) {
 async function edit(req, res) {
   const form = formidable({
     multiples: false,
-    uploadDir: __dirname + "/../public/img",
+    uploadDir: __dirname + "/../public/images",
     keepExtensions: true,
   });
   form.parse(req, async (err, fields, files) => {
-    console.log(fields);
-    console.log(files);
     await Article.update(
       {
         title: String(fields.title),
 
         content: String(fields.content),
-        image: files.image.newFilename,
+        image: String(files.image.newFilename),
       },
-      /* { createdAt: String(req.body.createdAt) }, */
-      /* { where: { id: String(req.params.id) } }, */
 
-      { where: { id: Number(req.params.id) } },
+      { where: { id: Number(fields.newId) } },
     );
   });
 
@@ -100,18 +109,6 @@ async function destroy(req, res) {
   res.redirect("/admin");
 }
 
-/* *************************************************************** */
-/* async function showContact(req, res) {
-  res.render("contact");
-}
-
-async function showAboutUs(req, res) {
-  res.render("aboutUs");
-} */
-
-// Otros handlers...
-// ...
-
 module.exports = {
   showHome,
   showArticle,
@@ -122,6 +119,4 @@ module.exports = {
   showCreate,
   showEdit,
   showArticlesJson,
-  /* showContact,
-  showAboutUs, */
 };
