@@ -62,7 +62,11 @@
         <div class="col-md-10 col-lg-8 col-xl-7">
           <h3>Modifica el articulo</h3>
 
-          <form method="post" action="/admin/editar/<%= article.id %>">
+          <form
+            enctype="multipart/form-data"
+            method="post"
+            action="/admin/editar/<%= article.id %>"
+          >
             <div class="form-floating">
               <input
                 name="title"
@@ -97,8 +101,8 @@
                 name="image"
                 class="form-control"
                 id="image"
-                type="url"
-                placeholder="Enter your image url..."
+                type="file"
+                placeholder="Enter your image ..."
                 data-sb-validations="required"
               />
               <label for="image">Image URL</label>

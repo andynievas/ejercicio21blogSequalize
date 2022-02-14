@@ -1,4 +1,5 @@
 const { Article, User, Comment } = require("../models");
+const formidable = require("formidable");
 
 async function showHome(req, res) {
   const articles = await Article.findAll({ include: User });
@@ -12,9 +13,15 @@ async function showHome(req, res) {
 }
 
 async function showArticle(req, res) {
-  const article = await Article.findByPk(Number(req.params.id), { include: [User, Comment], nested: true } );
-  const commentsWithUser = await Comment.findAll({ where: {'articleId': article.id }, include: [Article, User] });
-  
+  const article = await Article.findByPk(Number(req.params.id), {
+    include: [User, Comment],
+    nested: true,
+  });
+  const commentsWithUser = await Comment.findAll({
+    where: { articleId: article.id },
+    include: [Article, User],
+  });
+
   res.render("article", {
     article,
     user: article.user,
@@ -63,22 +70,29 @@ async function showEdit(req, res) {
 }
 // Actualiza los datos del articulo en la base de datos
 async function edit(req, res) {
-  console.log(req.body.newId);
-  const article = await Article.findByPk(req.body.newId);
-  await Article.update(
-    {
-      title: String(req.body.title),
+  const form = formidable({
+    multiples: false,
+    uploadDir: __dirname + "/../public/img",
+    keepExtensions: true,
+  });
+  form.parse(req, async (err, fields, files) => {
+    console.log(fields);
+    console.log(files);
+    await Article.update(
+      {
+        title: String(fields.title),
 
-      content: String(req.body.content),
-      image: String(req.body.image),
-    },
-    /* { createdAt: String(req.body.createdAt) }, */
-    /* { where: { id: String(req.params.id) } }, */
+        content: String(fields.content),
+        image: files.image.newFilename,
+      },
+      /* { createdAt: String(req.body.createdAt) }, */
+      /* { where: { id: String(req.params.id) } }, */
 
-    { where: { id: Number(req.body.newId) } },
-  );
-  console.log(article);
-  res.redirect("/");
+      { where: { id: Number(req.params.id) } },
+    );
+  });
+
+  res.redirect("/admin");
 }
 
 async function destroy(req, res) {

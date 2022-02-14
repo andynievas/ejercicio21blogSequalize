@@ -1,4 +1,6 @@
 // Display a listing of the resource.
+const { Comment } = require("../models");
+const { faker } = require("@faker-js/faker");
 
 async function index(req, res) {}
 
@@ -7,7 +9,14 @@ async function show(req, res) {}
 
 // Show the form for creating a new resource
 async function create(req, res) {
-  res.redirect( `/articulo/${req.params.id}` );
+  const randomUser = faker.datatype.number({ min: 1, max: 20 });
+  const comment = await Comment.create({
+    userId: randomUser,
+    content: String(req.body.comment),
+    articleId: String(req.params.id),
+  });
+
+  res.redirect(`/articulo/${req.params.id}`);
 }
 
 // Store a newly created resource in storage.

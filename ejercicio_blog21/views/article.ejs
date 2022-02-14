@@ -37,7 +37,7 @@
             <div class="post-heading">
               <h1><%= article.title %></h1>
               <span class="meta"> Posted on <%= article.createdAt %> </span>
-              <p style="text-align: end;" >By <%= user.firstname + " " + user.lastname %></p>
+              <p style="text-align: end">By <%= user.firstname + " " + user.lastname %></p>
             </div>
           </div>
         </div>
@@ -49,28 +49,36 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
             <p><%= article.content %></p>
-            <hr>
-            <p class="my-3" ><%= comments.length === 0 ? "Leave the first comment" : "Comments" %></p>
+            <hr />
+            <p class="my-3">
+              <%= comments.length === 0 ? "Leave the first comment" : "Comments" %>
+            </p>
             <% for (const comment of comments) { %>
-              <div class="cardd">
-                <hr>
-                <p class="m-0" style="font-size: large" ><%=`${comment.user.firstname} ${comment.user.lastname}: ${comment.content}`%></p>
-              </div>
+            <div class="cardd">
+              <hr />
+              <p class="m-0" style="font-size: large">
+                <%=`${comment.user.firstname} ${comment.user.lastname}: ${comment.content}`%>
+              </p>
+            </div>
             <% } %>
-            <hr>
+            <hr />
 
-            <form action="/" method="POST" class="d-flex flex-column align-items-end" >
+            <form
+              action="/articulo/comment/<%= article.id %> "
+              method="POST"
+              class="d-flex flex-column align-items-end"
+            >
               <textarea
+                name="comment"
                 placeholder="Escribir comentario..."
                 class="form-control shadow"
-                id="comments"
+                id="comment"
                 rows="2"
                 maxlength="250"
-                style="max-height: 150px;"
+                style="max-height: 150px"
               ></textarea>
-              <input type="button" class="btn btn-sm btn-primary text-uppercase" value="Publicar" />
+              <input type="submit" class="btn btn-sm btn-primary text-uppercase" value="Publicar" />
             </form>
-
           </div>
         </div>
       </div>

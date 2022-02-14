@@ -2,7 +2,7 @@ const express = require("express");
 const publicRouter = express.Router();
 
 const pagesController = require("../controllers/pagesController");
-const commentsController = require("../controllers/pagesController");
+const commentsController = require("../controllers/commentsController");
 
 // Rutas del Públicas:
 // ...
