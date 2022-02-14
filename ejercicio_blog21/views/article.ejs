@@ -49,26 +49,26 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
             <p><%= article.content %></p>
-
             <hr>
-
             <p class="my-3" ><%= comments.length === 0 ? "Leave the first comment" : "Comments" %></p>
             <% for (const comment of comments) { %>
-              <div class="card">
+              <div class="cardd">
+                <hr>
                 <p class="m-0" style="font-size: large" ><%=`${comment.user.firstname} ${comment.user.lastname}: ${comment.content}`%></p>
               </div>
             <% } %>
-
             <hr>
 
-            <form action="/">
+            <form action="/" method="POST" class="d-flex flex-column align-items-end" >
               <textarea
                 placeholder="Escribir comentario..."
                 class="form-control shadow"
                 id="comments"
                 rows="2"
+                maxlength="250"
+                style="max-height: 150px;"
               ></textarea>
-              <input type="button" class="btn btn-sm btn-success text-uppercase" value="Publicar" />
+              <input type="button" class="btn btn-sm btn-primary text-uppercase" value="Publicar" />
             </form>
 
           </div>
@@ -77,7 +77,7 @@
     </article>
 
     <!-- Comments-->
-    <div class="container">
+    <div class="d-none container">
       <div class="mb-3 shadow border rounded p-3 d-flex flex-column">
         <label for="comments" class="form-label">Ingresar comentarios</label>
 

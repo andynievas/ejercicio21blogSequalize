@@ -42,23 +42,27 @@
           >
         </div>
 
-        <div class="p-2" style="border: gray 1px solid;" >
-          <div class="d-flex justify-content-between">
-            <h5 class="me-4" ><%= articles[0].title %></h5>
+        <% //for (const article of articles) { %>
+          <div class="p-2" style="border: gray 1px solid;" >
+            <div class="d-flex justify-content-between">
+              <div>
+                <h5 class="me-4" ><%= articles[0].title %></h5>
+                <p class="m-0" >By <%=`${articles[0].user.firstname} ${articles[0].user.lastname}`%></p>
+              </div>
 
-            <div >
-              <a href="/admin/editar/<%= articles[0].id %>">
-                <button class="btn btn-sm btn-primary text-uppercase w-100">Edit</button>
-              </a>
-              <a href="/admin/eliminar/<%= articles[0].id %>">
-                <button class="btn btn-sm btn-danger text-uppercase w-100">Delete</button>
-              </a>
+              <div class="d-flex flex-wrap" >
+                <a style="flex: 1;" href="/admin/editar/<%= articles[0].id %>">
+                  <button class="btn btn-sm btn-primary text-uppercase w-100">Edit</button>
+                </a>
+                <a style="flex: 1;" href="/admin/eliminar/<%= articles[0].id %>">
+                  <button class="btn btn-sm btn-danger text-uppercase w-100">Delete</button>
+                </a>
+              </div>
+
             </div>
-
+            <p class="m-0" ><%= articles[0].content.substring(0, 100) %></p>
           </div>
-          <p class="mt-0" ><%= articles[0].content.substring(0, 100) %></p>
-        </div>
-
+        <% //} %>
 
         <table class="table table-striped border p-2">
           <thead>
@@ -70,7 +74,7 @@
             </tr>
           </thead>
           <tbody>
-            <% for (let article of articles) { %>
+            <% for (const article of articles) { %>
             <tr>
               <td><%= article.title %></td>
               <td><%= article.content.substring(0, 100) %></td>
