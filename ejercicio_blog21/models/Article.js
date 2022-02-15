@@ -10,15 +10,19 @@ module.exports = (sequelize, Model, DataTypes) => {
       },
       title: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       content: {
         type: DataTypes.TEXT,
+        allowNull: false,
       },
       image: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       date: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
     },
     {
