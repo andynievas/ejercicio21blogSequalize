@@ -1,6 +1,7 @@
 const express = require("express");
 const adminRouter = express.Router();
 const pagesController = require("../controllers/pagesController");
+const userController = require("../controllers/userController");
 const { adminAuthentication } = require("../middleware/authenticate");
 // Rutas del Admin:
 adminRouter.use(adminAuthentication);
