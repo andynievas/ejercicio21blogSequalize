@@ -1,11 +1,11 @@
 const express = require("express");
 const publicRouter = express.Router();
+const passport = require("passport");
 
 const pagesController = require("../controllers/pagesController");
 const commentsController = require("../controllers/commentsController");
 
 // Rutas del Públicas:
-// ...
 
 publicRouter.get("/", (req, res) => {
   pagesController.showHome(req, res);
@@ -22,5 +22,16 @@ publicRouter.post("/articulo/comment/:id", (req, res) => {
 publicRouter.get("/api/articulos", (req, res) => {
   pagesController.showArticlesJson(req, res);
 });
+publicRouter.get("/login", (req, res) => {
+  res.render("login");
+});
+
+publicRouter.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/admin",
+    failureRedirect: "/login",
+  }),
+);
 
 module.exports = publicRouter;
