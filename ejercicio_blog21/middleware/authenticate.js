@@ -1,3 +1,4 @@
+//Prohibe el ingreso a admin si no hay usuario logueado
 function adminAuthentication(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
@@ -5,7 +6,7 @@ function adminAuthentication(req, res, next) {
     res.redirect("/login");
   }
 }
-
+//Prohibe el ingreso a signin y a login si hay usuario logueado
 function isLoged(req, res, next) {
   if (req.isAuthenticated()) {
     res.redirect("/");
@@ -13,4 +14,5 @@ function isLoged(req, res, next) {
     return next();
   }
 }
+
 module.exports = { adminAuthentication, isLoged };

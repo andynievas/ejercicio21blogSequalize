@@ -81,6 +81,7 @@ async function showEdit(req, res) {
   const article = await Article.findByPk(Number(req.params.id));
   res.render("edit", { article });
 }
+
 // Actualiza los datos del articulo en la base de datos
 async function edit(req, res) {
   const form = formidable({

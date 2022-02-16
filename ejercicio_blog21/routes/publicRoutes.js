@@ -24,9 +24,10 @@ publicRouter.post("/articulo/comment/:id", (req, res) => {
 publicRouter.get("/api/articulos", (req, res) => {
   pagesController.showArticlesJson(req, res);
 });
-publicRouter.get("/registro", show);
+publicRouter.get("/registro", isLoged, show);
 publicRouter.post("/registro", create);
 publicRouter.get("/logout", logout);
+
 publicRouter.get("/login", isLoged, (req, res) => {
   res.render("login");
 });
