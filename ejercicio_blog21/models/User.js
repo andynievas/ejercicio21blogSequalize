@@ -1,6 +1,10 @@
 const bcrypt = require("bcryptjs");
 module.exports = (sequelize, Model, DataTypes) => {
-  class User extends Model {}
+  class User extends Model {
+    async validPassword(password) {
+      return await bcrypt.compare(password, this.password);
+    }
+  }
 
   User.init(
     {
@@ -30,10 +34,6 @@ module.exports = (sequelize, Model, DataTypes) => {
       modelName: "user",
     },
   );
-
-  /*   function validPassword(password) {
-    return bcrypt.compareSync(password, this.password);
-  } */
 
   return User;
 };

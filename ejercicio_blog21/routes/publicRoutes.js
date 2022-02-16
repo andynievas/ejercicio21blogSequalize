@@ -1,6 +1,7 @@
 const express = require("express");
 const publicRouter = express.Router();
 const passport = require("passport");
+const { isLoged } = require("../middleware/authenticate");
 
 const pagesController = require("../controllers/pagesController");
 const commentsController = require("../controllers/commentsController");
@@ -22,7 +23,7 @@ publicRouter.post("/articulo/comment/:id", (req, res) => {
 publicRouter.get("/api/articulos", (req, res) => {
   pagesController.showArticlesJson(req, res);
 });
-publicRouter.get("/login", (req, res) => {
+publicRouter.get("/login", isLoged, (req, res) => {
   res.render("login");
 });
 

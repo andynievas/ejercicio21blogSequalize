@@ -1,10 +1,10 @@
 const express = require("express");
 const adminRouter = express.Router();
 const pagesController = require("../controllers/pagesController");
-const authenticate = require("../middleware/authenticate");
+const { adminAuthentication } = require("../middleware/authenticate");
 // Rutas del Admin:
-
-adminRouter.get("/", authenticate, (req, res) => {
+adminRouter.use(adminAuthentication);
+adminRouter.get("/", (req, res) => {
   //Ver como hago el middleware! asi funcióna
   pagesController.showAdmin(req, res);
 });

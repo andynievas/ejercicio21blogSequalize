@@ -9,6 +9,7 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const { User } = require("./models");
+const flash = require("express-flash");
 
 app.use(
   session({
@@ -17,6 +18,7 @@ app.use(
     saveUninitialized: false,
   }),
 );
+app.use(flash());
 app.use(passport.session()); //Acá le digo a express que vamos a usar sesiones
 app.use(express.json());
 app.use(express.static("public"));
@@ -24,31 +26,35 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 passport.use(
-  new LocalStrategy({ usernameField: "email", passwordField: "password" }, async function (
-    username,
-    password,
-    cb,
-  ) {
-    try {
-      const user = await User.findOne({ where: { email: username } });
-      if (!user) {
-        return cb(null, false, { message: "Incorrect username or password" });
+  new LocalStrategy(
+    { usernameField: "email", passwordField: "password", session: true, passReqToCallback: true },
+    async function (req, username, password, cb) {
+      try {
+        const user = await User.findOne({ where: { email: username } });
+        if (!user) {
+          req.flash("ms", "Incorrect Username or password.");
+          return cb(null, false, { message: "Incorrect username or password" });
+        }
+        if (!(await user.validPassword(password))) {
+          req.flash("ms", "Incorrect Username or password.");
+          return cb(null, false, { message: "Incorrect Username or password." });
+        }
+        return cb(null, user);
+      } catch (error) {
+        console.log(error);
+        return cb;
       }
-      return cb(null, user);
-    } catch (error) {
-      console.log(error);
-      return cb;
-    }
-    //Acá iría el codigo de la verificación de la password
+      //Acá iría el codigo de la verificación de la password
 
-    /*    crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
+      /*    crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
       if (err) { return cb(err); }
       if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
         return cb(null, false, { message: 'Incorrect username or password.' });
       }
       return cb(null, row);
     }); */
-  }),
+    },
+  ),
 );
 
 //Agarra el id del usuario y lo mete en la sesión.
@@ -67,7 +73,7 @@ passport.deserializeUser(function (id, done) {
 });
 routes(app);
 
-dbInitialSetup(); // Crea tablas e inserta datos de prueba.
+//dbInitialSetup(); // Crea tablas e inserta datos de prueba.
 
 app.listen(APP_PORT, () =>
   console.log(`\n[Express] Servidor corriendo en el puerto ${APP_PORT}!\n`),

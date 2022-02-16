@@ -5,4 +5,12 @@ function adminAuthentication(req, res, next) {
     res.redirect("/login");
   }
 }
-module.exports = adminAuthentication;
+
+function isLoged(req, res, next) {
+  if (req.isAuthenticated()) {
+    res.redirect("/");
+  } else {
+    return next();
+  }
+}
+module.exports = { adminAuthentication, isLoged };
