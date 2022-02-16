@@ -1,32 +1,42 @@
 const { User } = require("../models");
 
-// Display a listing of the resource.
+
 
 async function index(req, res) {}
 
-// Display the specified resource.
+
 async function show(req, res) {
 
   res.render("signin");
 }
 
-// Show the form for creating a new resource
+
 async function create(req, res) {
 
- // const [user, created] = await User.findOrCreate
-  
-}
+ const [user, created] = await User.findOrCreate(
+   {where: {email}}
+ );
 
-// Store a newly created resource in storage.
+ if(created) {
+
+  req.login(user, () => res.redirect("/admin"));
+ } 
+ else {
+   res.redirect("/login");
+ }
+  
+};
+
+
 async function store(req, res) {}
 
-// Show the form for editing the specified resource.
+
 async function edit(req, res) {}
 
-// Update the specified resource in storage.
+
 async function update(req, res) {}
 
-// Remove the specified resource from storage.
+
 async function destroy(req, res) {}
 
 // Otros handlers...
