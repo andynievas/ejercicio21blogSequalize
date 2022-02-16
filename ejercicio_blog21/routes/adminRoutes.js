@@ -1,15 +1,12 @@
 const express = require("express");
-const res = require("express/lib/response");
 const adminRouter = express.Router();
 const pagesController = require("../controllers/pagesController");
-//const authenticate = require("../middleware/authenticate");->middleware para autenticar
+const authenticate = require("../middleware/authenticate");
 // Rutas del Admin:
-// ...
 
-adminRouter.get("/", (req, res) => {
+adminRouter.get("/", authenticate, (req, res) => {
   //Ver como hago el middleware! asi funcióna
-  if (req.isAuthenticated()) pagesController.showAdmin(req, res);
-  else res.redirect("login");
+  pagesController.showAdmin(req, res);
 });
 
 adminRouter.get("/editar/:id", (req, res) => {

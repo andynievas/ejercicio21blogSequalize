@@ -21,12 +21,19 @@ module.exports = (sequelize, Model, DataTypes) => {
           isEmail: true,
         },
       },
+      password: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,
       modelName: "user",
     },
   );
+
+  /*   function validPassword(password) {
+    return bcrypt.compareSync(password, this.password);
+  } */
 
   return User;
 };

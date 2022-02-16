@@ -1,8 +1,8 @@
-/* module.exports = (req, res, next) => {
+function adminAuthentication(req, res, next) {
   if (req.isAuthenticated()) {
-    res.render("admin");
+    return next();
   } else {
-    res.redirect("login");
+    res.redirect("/login");
   }
-  next();
-}; */
+}
+module.exports = adminAuthentication;

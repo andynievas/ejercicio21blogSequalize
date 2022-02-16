@@ -65,7 +65,6 @@ passport.deserializeUser(function (id, done) {
       done(error, user);
     });
 });
-
 routes(app);
 
 dbInitialSetup(); // Crea tablas e inserta datos de prueba.
