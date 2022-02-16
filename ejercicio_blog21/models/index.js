@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize(
@@ -20,8 +21,8 @@ const Article = require("./Article")(sequelize, Model, DataTypes);
 
 User.hasMany(Article);
 User.hasMany(Comment);
-Article.hasMany( Comment );
-Article.belongsTo( User );
+Article.hasMany(Comment);
+Article.belongsTo(User);
 Comment.belongsTo(User);
 Comment.belongsTo(Article);
 

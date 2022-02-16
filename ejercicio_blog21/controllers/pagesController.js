@@ -5,7 +5,7 @@ const { faker } = require("@faker-js/faker");
 async function showHome(req, res) {
   const articles = await Article.findAll({
     include: User,
-    order: [["date", "DESC"]],
+    order: [["createdAt", "DESC"]],
   });
 
   res.render("home", {
@@ -81,6 +81,7 @@ async function showEdit(req, res) {
   const article = await Article.findByPk(Number(req.params.id));
   res.render("edit", { article });
 }
+
 // Actualiza los datos del articulo en la base de datos
 async function edit(req, res) {
   const form = formidable({

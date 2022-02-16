@@ -1,4 +1,4 @@
-// Display a listing of the resource.
+
 const { Comment } = require("../models");
 const { faker } = require("@faker-js/faker");
 
@@ -19,6 +19,7 @@ async function create(req, res) {
   res.redirect(`/articulo/${req.params.id}`);
 }
 
+
 // Store a newly created resource in storage.
 async function store(req, res) {}
 
@@ -31,8 +32,6 @@ async function update(req, res) {}
 // Remove the specified resource from storage.
 async function destroy(req, res) {}
 
-// Otros handlers...
-// ...
 
 module.exports = {
   index,
