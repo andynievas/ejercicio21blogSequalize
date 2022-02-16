@@ -5,7 +5,7 @@ const { faker } = require("@faker-js/faker");
 async function showHome(req, res) {
   const articles = await Article.findAll({
     include: User,
-    order: [["date", "DESC"]],
+    order: [["createdAt", "DESC"]],
   });
 
   res.render("home", {
