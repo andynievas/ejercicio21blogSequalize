@@ -6,11 +6,11 @@ faker.locale = "es";
 module.exports = async () => {
   const comments = [];
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 2; i++) {
     comments.push({
       content: faker.lorem.sentence(10),
-      userId: faker.datatype.number({ min: 1, max: 20 }),
-      articleId: faker.datatype.number({ min: 1, max: 20 }),
+      userId: faker.datatype.number({ min: 1, max: 2 }),
+      articleId: faker.datatype.number({ min: 1, max: 2 }),
     });
   }
 

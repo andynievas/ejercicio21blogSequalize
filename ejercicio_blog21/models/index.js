@@ -1,4 +1,4 @@
-require("dotenv");//.config()
+require("dotenv").config();
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize(
@@ -11,14 +11,17 @@ const sequelize = new Sequelize(
     logging: false, // Para que no aparezcan mensajes en consola.
   },
 );
-
+ 
 const User = require("./User")(sequelize, Model, DataTypes);
 const Comment = require("./Comment")(sequelize, Model, DataTypes);
 const Article = require("./Article")(sequelize, Model, DataTypes);
+const Role = require("./Role")(sequelize, Model, DataTypes);
 
 // Luego de definir los modelos, se pueden establecer relaciones
 // entre los mismos...
 
+User.belongsTo(Role);
+// Role.hasMany(User);
 User.hasMany(Article);
 User.hasMany(Comment);
 Article.hasMany(Comment);
@@ -26,9 +29,11 @@ Article.belongsTo(User);
 Comment.belongsTo(User);
 Comment.belongsTo(Article);
 
+
 module.exports = {
   sequelize,
   User,
   Comment,
   Article,
+  Role
 };

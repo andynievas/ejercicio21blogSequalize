@@ -6,13 +6,13 @@ faker.locale = "es";
 module.exports = async () => {
   const articles = [];
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 4; i++) {
     articles.push({
       title: faker.lorem.sentence(5),
       content: faker.lorem.paragraphs(),
       image: faker.image.imageUrl(),
       // date: faker.date.past(),
-      userId: faker.datatype.number({ min: 1, max: 20 }),
+      userId: faker.datatype.number({ min: 1, max: 2 }),
     });
   }
 
