@@ -8,7 +8,7 @@ const app = express();
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const { User } = require("./models");
+const { User, Role } = require("./models");
 const flash = require("express-flash");
 
 app.use(
@@ -63,12 +63,12 @@ passport.serializeUser(function (user, done) {
 });
 //Esto se ejecuta cuando el usuario ya está logueado para autorizar las rutas.
 passport.deserializeUser(function (id, done) {
-  User.findByPk(id)
+  User.findByPk(id, { include: Role })
     .then((user) => {
       done(null, user); // Usuario queda disponible en req.user.
     })
     .catch((error) => {
-      done(error, user);
+      done(error, /*user*/);
     });
 });
 routes(app);

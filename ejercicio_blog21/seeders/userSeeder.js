@@ -6,14 +6,14 @@ faker.locale = "es";
 module.exports = async () => {
   const users = [];
 
-  // users.push({
-  //   firstname: "prueba",
-  //   lastname: "prueba",
-  //   creartedAt: faker.image.imageUrl(),
-  //   email: "1@1.com",
-  //   password: "$2a$07$F4JwuGpahqTkZU.lgzQqSesfTZBiFiFs3S.Uz31ZLJxytqRMm0Mva",
-  //   roleId: Number(1),
-  // });
+  users.push({
+    firstname: "a",
+    lastname: "a",
+    // creartedAt: faker.image.imageUrl(),
+    email: "hola1@gmail.com",
+    password: "$2a$07$IyRg/RQxG8LZ5FLlStuto.3l8nISFYPmBXdby612Qwj9EwPUcondO",
+    // roleId: Number(1),
+  });
   for (let i = 0; i < 2; i++) {
     users.push({
       firstname: faker.name.firstName(),

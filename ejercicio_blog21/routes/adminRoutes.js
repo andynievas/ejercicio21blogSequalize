@@ -5,6 +5,7 @@ const userController = require("../controllers/userController");
 const { adminAuthentication } = require("../middleware/authenticate");
 // Rutas del Admin:
 adminRouter.use(adminAuthentication);
+
 adminRouter.get("/", (req, res) => {
   //Ver como hago el middleware! asi funcióna
   pagesController.showAdmin(req, res);

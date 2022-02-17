@@ -29,7 +29,7 @@ publicRouter.post("/registro", create);
 publicRouter.get("/logout", logout);
 
 publicRouter.get("/login", isLoged, (req, res) => {
-  res.render("login");
+  res.render("login", { currentUser: res.locals.user || null, });
 });
 
 publicRouter.post(

@@ -9,9 +9,9 @@ async function show(req, res) {}
 
 // Show the form for creating a new resource
 async function create(req, res) {
-  const randomUser = faker.datatype.number({ min: 1, max: 20 });
+  const currentUser = req.user;
   const comment = await Comment.create({
-    userId: randomUser,
+    userId: currentUser.id,
     content: String(req.body.comment),
     articleId: String(req.params.id),
   });

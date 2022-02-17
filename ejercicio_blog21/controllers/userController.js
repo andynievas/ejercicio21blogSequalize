@@ -8,18 +8,19 @@ async function destroy(req, res) {}
 
 //Funcion encargada de mostrar la view singin.ejs
 async function show(req, res) {
-  res.render("signin");
+  res.render("signin", {currentUser: res.locals.user || null,} );
 }
 
 //funcion encargada de crear el usuario
 async function create(req, res) {
   const { firstname, lastname, email, password } = req.body;
   const [user, created] = await User.findOrCreate({
-    where: { firstname, lastname, email, password },
+    where: { firstname, lastname, email },//password
+    defaults: { password, roleId: 1 }
   });
 
   if (created) {
-    req.login(user, () => res.redirect("/admin"));
+    req.login(user, () => res.redirect("/"));
   } else {
     res.redirect("/login");
   }
