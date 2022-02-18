@@ -1,5 +1,5 @@
 const { Article, User, Comment } = require("../models");
-
+const jwt = require("jsonwebtoken");
 
 // Muestra todos los artículos en formato JSON
 async function show(req, res) {
@@ -31,8 +31,12 @@ async function showIfContainsLetters(req, res) {
 
 // Crea un articulo
 async function create(req, res) {
-  const { title, content, image } = req.body;
   const userId = req.user.id;
+
+  jwt
+
+
+  const { title, content, image } = req.body;
   const [article, created] = await Article.findOrCreate({
     where: { title, userId },
     defaults: {

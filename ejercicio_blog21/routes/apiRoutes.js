@@ -26,10 +26,10 @@ apiRoutes.get("/articles/contains/:letters", apiController.showIfContainsLetters
 apiRoutes.post("/articles/create", isAuth, isAdmin, apiController.create );
 
 // Edit article
-apiRoutes.patch("/articles/:autor_id", apiController.show );
+apiRoutes.patch("/articles/:autor_id", isAuth, apiController.edit );
 
 // Destroy article
-apiRoutes.delete("/articles/:autor_id", apiController.show );
+apiRoutes.delete("/articles/:autor_id", isAuth, isAdmin, apiController.show );
 
 
 module.exports = apiRoutes;

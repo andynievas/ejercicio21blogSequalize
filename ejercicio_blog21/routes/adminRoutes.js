@@ -2,33 +2,32 @@ const express = require("express");
 const adminRouter = express.Router();
 const pagesController = require("../controllers/pagesController");
 const userController = require("../controllers/userController");
-const { adminAuthentication } = require("../middleware/authenticate");
+const authController = require("../controllers/authController");
+
+const isAuth = require("../middleware/isAuth");
+const isAdmin = require("../middleware/isAdmin");
+
+
+// Es necesario estar logeado para ingresar
+adminRouter.use(isAuth);
+
 // Rutas del Admin:
-adminRouter.use(adminAuthentication);
+adminRouter.get("/jwt", isAdmin, authController.show);
 
-adminRouter.get("/", (req, res) => {
-  //Ver como hago el middleware! asi funcióna
-  pagesController.showAdmin(req, res);
-});
+adminRouter.get("/jwt/create", isAdmin, authController.create);
 
-adminRouter.get("/editar/:id", (req, res) => {
-  pagesController.showEdit(req, res);
-});
+adminRouter.get("/", pagesController.showAdmin );
 
-adminRouter.post("/editar/:id", (req, res) => {
-  pagesController.edit(req, res);
-});
+adminRouter.get("/editar/:id", pagesController.showEdit );
 
-adminRouter.get("/crear", (req, res) => pagesController.showCreate(req, res));
+adminRouter.post("/editar/:id", pagesController.edit );
 
-adminRouter.post("/crear", (req, res) => pagesController.create(req, res));
+adminRouter.get("/crear", pagesController.showCreate );
 
-adminRouter.get("/eliminar/:id", (req, res) => {
-  pagesController.destroy(req, res);
-});
+adminRouter.post("/crear", pagesController.create );
 
-adminRouter.get("/eliminar-usuario/:id", (req, res) => {
-  userController.destroy(req, res);
-});
+adminRouter.get("/eliminar/:id", pagesController.destroy );
+
+adminRouter.get("/eliminar-usuario/:id", userController.destroy );
 
 module.exports = adminRouter;
