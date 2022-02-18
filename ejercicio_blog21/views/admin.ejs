@@ -35,34 +35,41 @@
     <!-- Main Content -->
     <main class="mb-4">
       <div class="container px-4 px-lg-5">
-        <div class="d-flex justify-content-end mb-2">
-          <a href="/admin/crear" class="btn btn-success text-uppercase" id="submitBtn"
-            >New Article</a
-          >
+        <div class="d-flex align-items-start flex-wrap mb-2">
+          <h3 style="flex: 1; min-width: 500px;" >Lista de <%= currentUser.role.content === "Escritor" ? "tus articulos" : "articulos del blog" %></h3>
+          <a href="/admin/crear" class="btn btn-success text-uppercase" id="submitBtn">New Article</a>
         </div>
 
         <table class="table table-striped border p-2">
           <thead>
             <tr>
               <th scope="col">Title</th>
-              <th scope="col">Article</th>
-              <th scope="col">Author</th>
-              <th scope="col">Action</th>
+              <th class="d-none d-md-block" scope="col">Article</th>
+              <% if( currentUser.role.content !== "Escritor" ){ %>
+                <th scope="col">Author</th>
+              <% } %>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
             <% for (const article of articles) { %>
             <tr>
               <td><%= article.title %></td>
-              <td class="elipsis"><%= article.content.substring(0, 100) %></td>
-              <td><%= article.user.firstname %> <%= article.user.lastname %></td>
+              <td class="d-none d-md-block elipsis"><%= article.content.substring(0, 100) %></td>
+              <% if( currentUser.role.content === "Administrador" || currentUser.role.content === "Editor" ){ %>
+                <td><%= article.user.firstname %> <%= article.user.lastname %></td>
+              <% } %>
+
               <td class="d-flex flex-column">
                 <a href="/admin/editar/<%= article.id %>">
                   <button class="btn btn-sm btn-primary text-uppercase w-100">Edit</button>
                 </a>
-                <a href="/admin/eliminar/<%= article.id %>">
-                  <button class="btn btn-sm btn-danger text-uppercase w-100 mt-1">Delete</button>
-                </a>
+                
+                <% if( currentUser.role.content === "Administrador" || currentUser.role.content === "Escritor" ){ %>
+                  <a href="/admin/eliminar/<%= article.id %>">
+                    <button class="btn btn-sm btn-danger text-uppercase w-100 mt-1">Delete</button>
+                  </a>
+                <% } %>
               </td>
             </tr>
             <% } %>
@@ -70,6 +77,35 @@
             <!-- <td colspan="2">Larry the Bird</td> -->
           </tbody>
         </table>
+
+        <% if ( currentUser.role.content === "Administrador" ) { %>
+          <h3 class="mt-2" >Lista de usuarios del blog</h3>
+          <table class="table table-striped border p-2" >
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Firstname</th>
+                <th scope="col">Lastname</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (const user of usersList) { %>
+                <tr>
+                  <td><%= user.id %></td>
+                  <td><%= user.firstname %></td>
+                  <td><%= user.lastname %></td>
+                  <td>
+                    <a href="/admin/eliminar-usuario/<%= user.id %>">
+                      <button class="btn btn-sm btn-danger text-uppercase w-100 mt-1">Delete</button>
+                    </a>
+                  </td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        <% } %>
+
       </div>
     </main>
     <!-- Footer-->

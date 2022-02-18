@@ -42,7 +42,7 @@ async function showAdmin(req, res) {
 
     const articles = await Article.findAll({ include: User });
 
-    const usersList = User.findAll();
+    const usersList = await User.findAll();
     
     res.render("admin", {
       title: "Welcome to Administrator page",
@@ -70,19 +70,18 @@ async function showAdmin(req, res) {
       currentUser: res.locals.user,
       articles,
     });
-  }
+  }else res.render("error", {
+    title: "4 - 0 - 4",
+    subtitle: "Lo sentimos mucho, esta página no existe",
+    image: "/assets/img/404error.jpg",
+    currentUser: res.locals.user,
+  });
 
 }
 
 // Muestra un formulario para crear un articulo
 async function showCreate(req, res) {
   res.render("create", {currentUser: res.locals.user} );
-}
-
-// Muestra todos los artículos en formato JSON
-async function showArticlesJson(req, res) {
-  const articles = await Article.findAll();
-  res.json(articles);
 }
 
 // Crea el articulo en la base de datos
@@ -101,9 +100,9 @@ async function create(req, res) {
       content: String(fields.content),
       image: "http://placeimg.com/640/480"/*String(files.image.newFilename)*/,
     });
+    res.redirect("/");
   });
 
-  res.redirect("/");
 }
 
 // Muestra el formulario para editar un articulo
@@ -149,5 +148,4 @@ module.exports = {
   destroy,
   showCreate,
   showEdit,
-  showArticlesJson,
 };

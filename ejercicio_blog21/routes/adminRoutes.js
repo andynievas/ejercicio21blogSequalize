@@ -27,4 +27,8 @@ adminRouter.get("/eliminar/:id", (req, res) => {
   pagesController.destroy(req, res);
 });
 
+adminRouter.get("/eliminar-usuario/:id", (req, res) => {
+  userController.destroy(req, res);
+});
+
 module.exports = adminRouter;

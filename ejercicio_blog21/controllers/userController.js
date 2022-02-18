@@ -4,7 +4,6 @@ async function index(req, res) {}
 async function store(req, res) {}
 async function edit(req, res) {}
 async function update(req, res) {}
-async function destroy(req, res) {}
 
 //Funcion encargada de mostrar la view singin.ejs
 async function show(req, res) {
@@ -23,6 +22,21 @@ async function create(req, res) {
     req.login(user, () => res.redirect("/"));
   } else {
     res.redirect("/login");
+  }
+}
+
+async function destroy(req, res) {
+  if( req.user.role.content === "Administrador" ){
+    // borrar por medio del id del usuario
+    const article = await User.destroy({ where: { id: Number(req.params.id) } });
+
+  }else{
+    res.render("error", {
+      title: "4 - 0 - 4",
+      subtitle: "Lo sentimos mucho, esta página no existe",
+      image: "/assets/img/404error.jpg",
+      currentUser: res.locals.user,
+    });
   }
 }
 

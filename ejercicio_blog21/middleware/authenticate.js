@@ -1,6 +1,15 @@
 
-//Prohibe el ingreso a signin y a login si hay usuario logueado
+// Si no esta logeado no lo deja continuar
 function isLoged(req, res, next) {
+  if ( !req.isAuthenticated() ) {
+    res.redirect("/login");
+  } else {
+    return next();
+  }
+}
+
+//Prohibe el ingreso a signin y a login si hay usuario logueado
+function preventShowAuthAgain(req, res, next) {
   if (req.isAuthenticated()) {
     res.redirect("/");
   } else {
@@ -10,22 +19,6 @@ function isLoged(req, res, next) {
 
 //Prohibe el ingreso a admin si no tiene los permisos suficientes
 function adminAuthentication(req, res, next) {
-
-  /*switch ( req.user.role.content ) {
-    case "Admin":
-      next();
-      break;
-    case "Editor":
-      next();
-      break;
-    case "Escritor":
-      next();
-      break;
-  
-    default:
-      
-      break;
-  }*/
   
   if ( req.isAuthenticated() ) 
     return next();
@@ -34,4 +27,4 @@ function adminAuthentication(req, res, next) {
   }
 }
 
-module.exports = { adminAuthentication, isLoged };
+module.exports = { isLoged, preventShowAuthAgain, adminAuthentication };
