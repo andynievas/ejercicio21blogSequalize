@@ -20,9 +20,10 @@ app.use(
 );
 app.use(flash());
 app.use(passport.session()); //Acá le digo a express que vamos a usar sesiones
-app.use(express.json());
+
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.set("view engine", "ejs");
 
 passport.use(

@@ -14,8 +14,9 @@ async function show(req, res) {
 //funcion encargada de crear el usuario
 async function create(req, res) {
   const { firstname, lastname, email, password } = req.body;
+  const role = 4;
   const [user, created] = await User.findOrCreate({
-    where: { firstname, lastname, email, password },
+    where: { firstname, lastname, email, password, roleId: role },
   });
 
   if (created) {
