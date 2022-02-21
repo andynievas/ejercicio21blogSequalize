@@ -5,6 +5,10 @@ module.exports = async () => {
   await db.sequelize.sync({ force: true });
   console.log("[Database] ¡Las tablas fueron creadas!");
 
+  // Ejecutar seeders (datos de prueba):
+  await require("./seeders/roleSeeder")();
+  console.log("[Database] ¡Los datos de prueba fueron insertados!");
+
   // Ejecutar seeders de (Users)
   await require("./seeders/userSeeder")();
   console.log("[Database] ¡Los datos de prueba fueron insertados!");

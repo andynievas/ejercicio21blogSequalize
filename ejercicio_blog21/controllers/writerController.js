@@ -107,7 +107,7 @@ async function edit(req, res) {
 
 async function destroy(req, res) {
   const article = await Article.findByPk(req.params.id);
-  if (req.user.roleId === 1 || req.user.id === article.userId) {
+  if (req.user.roleId === 3 || req.user.id === article.userId) {
     await article.destroy();
     res.redirect("/admin");
   } else {

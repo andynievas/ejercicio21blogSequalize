@@ -31,6 +31,9 @@ publicRouter.get("/logout", logout);
 publicRouter.get("/login", isLoged, (req, res) => {
   res.render("login");
 });
+/* publicRouter.get("/notAllowMsg", (req, res) => {
+  res.render("noPermision");
+}); */
 
 publicRouter.post(
   "/login",
